@@ -12,9 +12,16 @@ import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
 import { QUERY_PRODUCTS } from "../utils/queries";
 import spinner from '../assets/spinner.gif'
+//REDUX
+import { useDispatch, useSelector } from 'react-redux';
 
 function Detail() {
-  const [state, dispatch] = useStoreContext();
+  // REDUX
+  const dispatch = useDispatch();
+
+  const state = useSelector(state => state);
+
+  // const [state, dispatch] = useStoreContext();
   const { id } = useParams();
   
   const [currentProduct, setCurrentProduct] = useState({})
@@ -87,7 +94,7 @@ function Detail() {
 
   return (
     <>
-      {currentProduct ? (
+      {currentProduct && cart ? (
         <div className="container my-1">
           <Link to="/">
             ← Back to Products
@@ -103,7 +110,9 @@ function Detail() {
             <strong>Price:</strong>
             ${currentProduct.price}
             {" "}
-            <button onClick={addToCart}>Add to cart</button>
+            <button onClick={addToCart}>
+              Add to Cart
+            </button>
             <button 
               disabled={!cart.find(p => p._id === currentProduct._id)} 
               onClick={removeFromCart}
