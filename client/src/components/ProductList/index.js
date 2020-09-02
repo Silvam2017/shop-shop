@@ -6,9 +6,15 @@ import { idbPromise } from "../../utils/helpers";
 import ProductItem from "../ProductItem";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import spinner from "../../assets/spinner.gif"
+// REDUX
+import { useDispatch, useSelector } from 'react-redux';
 
-function ProductList({ currentCategory }) {
-  const [state, dispatch] = useStoreContext();
+function ProductList() {
+  // REDUX
+  const dispatch = useDispatch();
+  
+  const state = useSelector(state => state);
+  // const [state, dispatch] = useStoreContext();
 
   const { currentCategory } = state;
   
